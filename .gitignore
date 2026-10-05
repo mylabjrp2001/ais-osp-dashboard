@@ -1,0 +1,20 @@
+__pycache__/
+*.pyc
+.DS_Store
+venv/
+*.code-workspace
+.env
+
+# runtime state — written by app.py at runtime, must NOT be tracked
+# (tracking these makes every git pull on the server fight with live data)
+/contacts.json
+/daily_osp_remain.json
+/remarks.json
+*.json.tmp
+/uploads/
+
+# legacy/stray files — not referenced by app.py (templates/ versions are the real ones)
+/index.html
+/job_monitor.html
+/latest_data.xlsx
+/osp-dashboard2-main.zip

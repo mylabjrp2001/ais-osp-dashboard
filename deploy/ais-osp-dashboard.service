@@ -1,0 +1,16 @@
+[Unit]
+Description=AIS OSP Dashboard (Flask dev server, single-process by design)
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/srv/ais-osp-dashboard
+Environment="PORT=5000"
+EnvironmentFile=/srv/ais-osp-dashboard/.env
+ExecStart=/srv/ais-osp-dashboard/venv/bin/python3 app.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
