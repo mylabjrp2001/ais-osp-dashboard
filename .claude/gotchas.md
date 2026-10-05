@@ -16,6 +16,15 @@ tracked ใน git, working tree บน server จะ dirty ตลอด แล�
 บล็อก ต้อง gitignore ไว้แบบนี้ตลอดไป — ถ้าต้องย้ายข้อมูลเดิมขึ้น server ให้ `scp` ตรง ไม่ผ่าน git
 (ขั้นตอนอยู่ใน runbooks/deploy.md)
 
+## deploy จริงมาจากคนละ repo — `deploy/` ที่นี่คือ ops เท่านั้น
+Lightsail instance รัน **[parinyko/osp-dashboard2](https://github.com/parinyko/osp-dashboard2)**
+(repo ของเพื่อน, `app.py` เหมือน repo นี้ไบต์ต่อไบต์ ณ 2026-10-05) ไม่ใช่ `mylabjrp2001/ais-osp-dashboard`
+repo เพื่อน **ไม่มี `.gitignore` เลย** — `contacts.json`/`remarks.json`/`daily_osp_remain.json`/
+`uploads/*` ถูก commit ตรงๆ และโดนแอปเขียนทับตลอดเวลาเหมือนกัน แก้ด้วยการ `git stash push -u` ก่อน
+`git pull` แล้ว `git stash pop` กลับ (อยู่ใน `deploy/update.sh` แล้ว) — **ห้ามวาง
+`deploy/update.sh`/`deploy/osp-dashboard2.service` ไว้ใน `/srv/osp-dashboard2`** เพราะ `stash -u`
+จะดึงไฟล์ untracked พวกนี้ไปด้วย ต้องวางไว้นอก repo (เช่น home dir) ตามที่ runbooks/deploy.md บอก
+
 ## ไม่มี auth ในแอปเลย
 ทุก route เปิดให้ใครก็เข้าได้ ไม่มี login/password และ `contacts.json` มีชื่อ-เบอร์ติดต่อทีมจริง —
 ห้ามเปิดพอร์ตแอปออกสู่ public โดยตรง (อย่าเปิด 5000 ใน Lightsail firewall) ให้เข้าผ่าน Cloudflare

@@ -1,0 +1,16 @@
+[Unit]
+Description=OSP Dashboard (parinyko/osp-dashboard2) — Flask dev server, single-process by design
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/srv/osp-dashboard2
+Environment="PORT=5000"
+EnvironmentFile=/srv/osp-dashboard2/.env
+ExecStart=/srv/osp-dashboard2/venv/bin/python3 app.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
