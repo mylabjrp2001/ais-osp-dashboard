@@ -77,7 +77,36 @@ bash ~/deploy-osp-dashboard2.sh
 ต้อง stash/pop เพราะ repo เพื่อน **ไม่มี `.gitignore`** ไฟล์ runtime (`contacts.json` ฯลฯ) เลย ถ้า
 `git pull` ตรงๆ ตอน working tree dirty จะ fail (รายละเอียดใน gotchas.md)
 
-## 4. Rollback
+## 4. Auto-deploy เช็ค commit ใหม่ทุก 5 นาที (ถ้าต้องการ)
+
+ไม่ต้องรอเพื่อนบอกว่า push แล้ว — systemd timer จะ `git fetch` เช็คทุก 5 นาที ถ้า `origin/main`
+ขยับค่อย pull+restart (เหมือน `update.sh`) ถ้าไม่มีอะไรใหม่จะไม่แตะ service เลย ไม่มี downtime
+เกินจำเป็น
+
+```bash
+# เครื่อง dev
+scp deploy/auto-deploy.sh ubuntu@13.229.43.61:~/auto-deploy-osp-dashboard2.sh
+scp deploy/osp-dashboard2-autodeploy.service ubuntu@13.229.43.61:/tmp/
+scp deploy/osp-dashboard2-autodeploy.timer ubuntu@13.229.43.61:/tmp/
+
+# SSH เข้า instance
+ssh ubuntu@13.229.43.61
+chmod +x ~/auto-deploy-osp-dashboard2.sh
+sudo mv /tmp/osp-dashboard2-autodeploy.service /etc/systemd/system/
+sudo mv /tmp/osp-dashboard2-autodeploy.timer /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl enable --now osp-dashboard2-autodeploy.timer
+
+# เช็คว่าตั้งเวลาไว้จริง / ดู log ตอนมัน deploy
+systemctl list-timers osp-dashboard2-autodeploy.timer
+journalctl -u osp-dashboard2-autodeploy.service -f
+```
+
+ถ้าอยาก deploy ทันทีไม่ต้องรอ 5 นาที ยังรัน `bash ~/deploy-osp-dashboard2.sh` เองได้ตามปกติ
+
+ปิด auto-deploy: `sudo systemctl disable --now osp-dashboard2-autodeploy.timer`
+
+## 5. Rollback
 
 ```bash
 ssh ubuntu@13.229.43.61

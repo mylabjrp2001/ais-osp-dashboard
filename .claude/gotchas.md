@@ -16,6 +16,13 @@ tracked ใน git, working tree บน server จะ dirty ตลอด แล�
 บล็อก ต้อง gitignore ไว้แบบนี้ตลอดไป — ถ้าต้องย้ายข้อมูลเดิมขึ้น server ให้ `scp` ตรง ไม่ผ่าน git
 (ขั้นตอนอยู่ใน runbooks/deploy.md)
 
+## auto-deploy timer restart service ตอนมี commit ใหม่เท่านั้น แต่ไม่ใช่ zero-downtime
+`osp-dashboard2-autodeploy.timer` เช็คทุก 5 นาที — ถ้าไม่มี commit ใหม่จะไม่แตะ service เลย แต่
+ถ้ามี จะ `systemctl restart` ตรงๆ (ไม่ใช่ rolling/blue-green) ถ้าดันไปตรงจังหวะที่มีคนกำลังอัปโหลด
+Excel พอดี request นั้นจะขาด (ไม่กี่วินาที) ความเสี่ยงต่ำเพราะเกิดเฉพาะตอน deploy จริง ไม่ใช่ทุกรอบ
+poll — restart ปลอดภัยเพราะ `REMARKS`/`CONTACTS`/`DAILY_OSP_HISTORY` reload จากไฟล์ตอน start และ
+Excel ล่าสุดใน `uploads/` ก็ auto-load ใหม่เหมือนเดิม (ดู `load_latest_excel_into_memory()`)
+
 ## deploy จริงมาจากคนละ repo — `deploy/` ที่นี่คือ ops เท่านั้น
 Lightsail instance รัน **[parinyko/osp-dashboard2](https://github.com/parinyko/osp-dashboard2)**
 (repo ของเพื่อน, `app.py` เหมือน repo นี้ไบต์ต่อไบต์ ณ 2026-10-05) ไม่ใช่ `mylabjrp2001/ais-osp-dashboard`

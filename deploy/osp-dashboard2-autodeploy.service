@@ -1,0 +1,9 @@
+[Unit]
+Description=Check parinyko/osp-dashboard2 for new commits and deploy if changed
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=ubuntu
+ExecStart=/bin/bash /home/ubuntu/auto-deploy-osp-dashboard2.sh
