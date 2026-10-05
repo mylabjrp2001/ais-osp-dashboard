@@ -48,8 +48,8 @@ update.sh ดึงเข้าไปด้วยทุกรอบ) วาง�
 
 ```bash
 # รันจากเครื่อง dev (เครื่องนี้)
-scp deploy/osp-dashboard2.service ubuntu@<LIGHTSAIL_IP>:/tmp/
-scp deploy/update.sh ubuntu@<LIGHTSAIL_IP>:~/deploy-osp-dashboard2.sh
+scp deploy/osp-dashboard2.service ubuntu@13.229.43.61:/tmp/
+scp deploy/update.sh ubuntu@13.229.43.61:~/deploy-osp-dashboard2.sh
 
 # กลับไป SSH session บน instance
 sudo mv /tmp/osp-dashboard2.service /etc/systemd/system/
@@ -68,7 +68,7 @@ repo เพื่อนเป็น public → `git clone` ไม่ต้อง
 ## 3. Deploy อัปเดต (ทุกครั้งที่เพื่อน push โค้ดใหม่)
 
 ```bash
-ssh ubuntu@<LIGHTSAIL_IP>
+ssh ubuntu@13.229.43.61
 bash ~/deploy-osp-dashboard2.sh
 ```
 
@@ -80,7 +80,7 @@ bash ~/deploy-osp-dashboard2.sh
 ## 4. Rollback
 
 ```bash
-ssh ubuntu@<LIGHTSAIL_IP>
+ssh ubuntu@13.229.43.61
 cd /srv/osp-dashboard2
 git log --oneline -5        # หา commit ก่อนหน้า
 git checkout <commit-hash>
