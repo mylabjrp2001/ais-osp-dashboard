@@ -27,6 +27,8 @@ TOTAL_CWT = 0
 TOTAL_ONT = 0
 TOTAL_TLC = 0
 
+HOME_SUMMARY = None
+
 REMARKS = {}
 REMARK_FILE = "remarks.json"
 
@@ -432,7 +434,7 @@ def apply_group_rowspans(rows):
 
 
 def update_global_data(df):
-    global DATA, RAW_DATA, LAST_UPDATE
+    global DATA, RAW_DATA, LAST_UPDATE, HOME_SUMMARY
     global TOTAL_CRITICAL, TOTAL_MAJOR, TOTAL_MINOR, TOTAL_JOBS
     global TOTAL_SCT, TOTAL_CWT, TOTAL_ONT, TOTAL_TLC
 
@@ -450,6 +452,13 @@ def update_global_data(df):
 
     DATA = build_dashboard_data(df)
     LAST_UPDATE = datetime.now(ZoneInfo("Asia/Bangkok")).strftime("%d/%m/%Y %H:%M:%S")
+
+    # Home page used to call build_home_summary() fresh on every GET /
+    # (iterrows + regex datetime parsing over every job, every team re-looped)
+    # — under a couple of people refreshing at once that serialized the whole
+    # dev server and burned through the Lightsail burst CPU credits. Compute
+    # it once here, per upload, instead.
+    HOME_SUMMARY = build_home_summary()
 
 
 def empty_dashboard_data():
@@ -1064,7 +1073,7 @@ def build_home_summary():
 @app.route("/", methods=["GET"])
 def index():
     latest_osp = DAILY_OSP_HISTORY[-1] if DAILY_OSP_HISTORY else None
-    summary = build_home_summary()
+    summary = HOME_SUMMARY if HOME_SUMMARY is not None else build_home_summary()
     return render_template(
         "home.html",
         total_jobs=TOTAL_JOBS,
@@ -1135,4 +1144,4 @@ if __name__ == "__main__":
     if os.environ.get("WERKZEUG_RUN_MAIN") == "true" or os.environ.get("FLASK_DEBUG") != "1":
         Thread(target=daily_osp_scheduler, name="daily-osp-scheduler", daemon=True).start()
     port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
+    app.run(host="0.0.0.0", port=port, threaded=True)

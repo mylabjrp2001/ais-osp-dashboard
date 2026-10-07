@@ -23,9 +23,19 @@ Excel พอดี request นั้นจะขาด (ไม่กี่วิ
 poll — restart ปลอดภัยเพราะ `REMARKS`/`CONTACTS`/`DAILY_OSP_HISTORY` reload จากไฟล์ตอน start และ
 Excel ล่าสุดใน `uploads/` ก็ auto-load ใหม่เหมือนเดิม (ดู `load_latest_excel_into_memory()`)
 
+## /  route เคยคำนวณ home summary ใหม่ทุก request — แก้แล้วในสำเนานี้ (2026-10-07)
+Lightsail CPU burst capacity ลดฮวบตอนมีคนเปิด dashboard พร้อมกัน เพราะ `index()` เรียก
+`build_home_summary()` สดทุกครั้ง (มี `iterrows()` + regex parse datetime ทุก job + loop ทุกทีม
+ใหม่) ซ้ำกับที่ `update_global_data()` คำนวณไปแล้วตอน upload แถม Flask dev server ไม่ได้ตั้ง
+`threaded=True` เลยประมวลผลทีละ request เดียว — request หนักค้าง = ทุกคนที่เปิดพร้อมกันโดนคิว
+ด้วย แก้แล้วโดย cache ผลลง global `HOME_SUMMARY` ตอน `update_global_data()` รันครั้งเดียว (ไม่ใช่
+ทุก GET /) และเปิด `threaded=True` ให้ `app.run()` — **แก้ไว้ใน repo นี้เท่านั้น ยังไม่ได้ขึ้น
+`parinyko/osp-dashboard2`** ต้องส่ง diff นี้ให้เพื่อนเอาไป apply เองถึงจะมีผลจริงบน prod
+
 ## deploy จริงมาจากคนละ repo — `deploy/` ที่นี่คือ ops เท่านั้น
 Lightsail instance รัน **[parinyko/osp-dashboard2](https://github.com/parinyko/osp-dashboard2)**
-(repo ของเพื่อน, `app.py` เหมือน repo นี้ไบต์ต่อไบต์ ณ 2026-10-05) ไม่ใช่ `mylabjrp2001/ais-osp-dashboard`
+(repo ของเพื่อน, `app.py` **เคย**เหมือน repo นี้ไบต์ต่อไบต์ ณ 2026-10-05 — ตอนนี้ไม่เหมือนแล้ว
+เพราะแก้ perf fix ข้างบนไว้เฉพาะสำเนานี้) ไม่ใช่ `mylabjrp2001/ais-osp-dashboard`
 repo เพื่อน **ไม่มี `.gitignore` เลย** — `contacts.json`/`remarks.json`/`daily_osp_remain.json`/
 `uploads/*` ถูก commit ตรงๆ และโดนแอปเขียนทับตลอดเวลาเหมือนกัน แก้ด้วยการ `git stash push -u` ก่อน
 `git pull` แล้ว `git stash pop` กลับ (อยู่ใน `deploy/update.sh` แล้ว) — **ห้ามวาง
