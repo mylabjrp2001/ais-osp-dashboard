@@ -1,5 +1,10 @@
 # Deploy — AWS Lightsail (no Docker)
 
+> **2026-10-07 — ย้าย production ออกจาก Lightsail แล้ว** ไปรันบนเครื่อง internal แทน (ประหยัดค่า
+> เครื่อง + คุม CPU ได้ดีกว่า) รายละเอียด/credential ของเครื่องใหม่อยู่ใน **private ops docs** เท่านั้น
+> (repo นี้ public ไม่ใส่รายละเอียด infra ภายในไว้ที่นี่) ไฟล์ข้างล่างเก็บไว้เป็น reference/rollback —
+> IP ที่เห็นในไฟล์นี้เป็นของ Lightsail ตัวเก่า (ปิดแล้ว/กำลังจะปิด) ไม่ใช่ที่ที่รันจริงตอนนี้
+
 Deploy ของจริงมาจาก **[github.com/parinyko/osp-dashboard2](https://github.com/parinyko/osp-dashboard2)**
 — repo ของเพื่อน ไม่ใช่ repo นี้ (`mylabjrp2001/ais-osp-dashboard`) เรามีไว้แค่เก็บ `deploy/` +
 เอกสาร setup ช่วยเพื่อน โค้ดแอปตัวจริง (`app.py`) สองฝั่งเหมือนกันไบต์ต่อไบต์ (เช็คแล้ว 2026-10-05)

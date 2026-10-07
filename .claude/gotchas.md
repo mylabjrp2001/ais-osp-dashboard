@@ -32,6 +32,13 @@ Lightsail CPU burst capacity ลดฮวบตอนมีคนเปิด da
 ทุก GET /) และเปิด `threaded=True` ให้ `app.run()` — **แก้ไว้ใน repo นี้เท่านั้น ยังไม่ได้ขึ้น
 `parinyko/osp-dashboard2`** ต้องส่ง diff นี้ให้เพื่อนเอาไป apply เองถึงจะมีผลจริงบน prod
 
+## production ย้ายออกจาก Lightsail แล้ว (2026-10-07) — รายละเอียดอยู่ใน private ops docs
+CPU บน Lightsail พุ่งค้างบ่อย (burst credit หมด) + เสียค่าเครื่องรายเดือนโดยไม่จำเป็น เลยย้ายไปรันบน
+เครื่อง internal แทน ที่นั่น isolate เป็น container แยก จำกัด cpus/memory ไม่ให้กระทบระบบอื่นที่แชร์
+เครื่อง และตั้ง auto-deploy timer แบบเดียวกับที่ทำไว้ที่นี่ — **รายละเอียด/credential ของเครื่องนั้นไม่
+เก็บใน repo นี้เพราะ public** ดูได้จาก private ops docs เท่านั้น (ถามเจ้าของ repo นี้โดยตรง)
+`deploy/` + `runbooks/deploy.md` ที่เหลือในนี้คือของ Lightsail เดิม เก็บไว้เป็น reference/rollback
+
 ## deploy จริงมาจากคนละ repo — `deploy/` ที่นี่คือ ops เท่านั้น
 Lightsail instance รัน **[parinyko/osp-dashboard2](https://github.com/parinyko/osp-dashboard2)**
 (repo ของเพื่อน, `app.py` **เคย**เหมือน repo นี้ไบต์ต่อไบต์ ณ 2026-10-05 — ตอนนี้ไม่เหมือนแล้ว

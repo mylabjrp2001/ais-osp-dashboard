@@ -6,8 +6,11 @@ JSON file ข้าง `app.py` + global in-memory variables
 **Production ตัวจริงรันโค้ดจาก repo เพื่อน [parinyko/osp-dashboard2](https://github.com/parinyko/osp-dashboard2)**
 — repo นี้ (`ais-osp-dashboard`) เก็บแค่ `deploy/` + เอกสาร setup ไว้ช่วยเพื่อน ไม่ใช่ source ที่ deploy จริง
 
+**Production ย้ายออกจาก Lightsail แล้ว (2026-10-07)** ไปรันบนเครื่อง internal แทน — รายละเอียด/
+credential ของเครื่องนั้นอยู่ใน private ops docs เท่านั้น (repo นี้ public) ถามเจ้าของ repo โดยตรง
+
 ## เอกสาร
-- Deploy: [runbooks/deploy.md](runbooks/deploy.md) — AWS Lightsail instance เดียว ไม่ใช้ Docker
+- Deploy: [runbooks/deploy.md](runbooks/deploy.md) — ของ AWS Lightsail เดิม เก็บไว้เป็น reference/rollback
 - กับดักที่ต้องรู้ก่อนแก้โค้ด: [gotchas.md](gotchas.md)
 
 ## โครงสร้าง
