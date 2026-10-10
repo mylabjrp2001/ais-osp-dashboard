@@ -51,3 +51,4 @@ Lightsail เดิมเก็บไว้เป็น reference/rollback ท�
 - 2026-10-10 — Resource Monitor: เก็บทุกใบที่ทีมถือ (`others`: Job ID + สถานะ + site) กดช่องดูรายการ · โชว์ SITE_CODE ของแต่ละงาน (ดึงจาก Job Title เพราะไฟล์ JobMonitor ไม่มีคอลัมน์ SITE_CODE · ตรงกับ SITE_CODE ของ Data Job done 99.6%) — repo เพื่อน `57af384` + `aacfe91` ขึ้น prod แล้ว
 - 2026-10-10 — Resource Monitor: คลิกลากเลื่อนตาราง · ปุ่ม 📸 บันทึกตอนนี้ (`POST /resource_snapshot` · snapshot เก็บลงช่อง 30 นาทีปัจจุบันและแทนที่ของเดิมในช่องนั้น) — repo เพื่อน `f4b466d` + `c839c5d` ขึ้น prod แล้ว
 - 2026-10-10 — Resource Monitor sync กับการอัปโหลด: อัปโหลด Excel (`/dashboard` POST) แล้วบันทึกช่อง 30 นาทีปัจจุบันทันที · หน้าเช็ค `/resource_version` ทุก 1 นาทีแล้วรีเฟรชเอง (คงตำแหน่งเลื่อน) · เอาปุ่ม 📸 + `/resource_snapshot` ออก — repo เพื่อน `a6d8a15` ขึ้น prod แล้ว
+- 2026-10-10 — Daily OSP Remain กราฟ: แท่งไม่ติดขอบ (แต่ละ snapshot อยู่กลางช่องของตัวเอง + เผื่อหัว 15%) — repo เพื่อน ขึ้น prod แล้ว
