@@ -25,3 +25,8 @@ venv/
 /job_monitor.html
 /latest_data.xlsx
 /osp-dashboard2-main.zip
+
+# AIS network drawings (KMZ/KML/DWG) — internal data, never commit (this repo is public)
+KMZ/
+*.kmz
+*.kml
