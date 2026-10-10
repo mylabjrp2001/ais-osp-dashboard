@@ -80,3 +80,8 @@ Flask `render_template()` อ่านจาก `templates/` เท่านั�
 snapshot เดิมเอา Job ID ของ "แถวแรก" + สถานะของทุกงานต่อกัน ("Accepted, On-Site") → Job ID กับสถานะไม่ตรงกัน
 แก้แล้ว (repo เพื่อน `7704749`): เลือกงานที่คืบหน้าที่สุด `status_rank()` · การรวมช่องต้อง Job ID **และ** สถานะเหมือนกัน
 ประวัติก่อน 10 ต.ค. 2026 23:00 ยังเป็นรูปแบบเก่า (ไม่มี `job_count`)
+
+## SITE_CODE ไม่มีในไฟล์ JobMonitor — ดึงจาก Job Title
+ไฟล์ที่อัปโหลดเข้าแดชบอร์ด (JobMonitor_*.xlsx) ไม่มีคอลัมน์ SITE_CODE (`Node` ว่างทั้งหมด) แต่ Job Title ขึ้นต้นด้วยรหัสไซต์
+`[Important] PADUM-[1605]SitePriority=...` → `site_code_from_title()` ใน app.py (repo เพื่อน) · เทียบกับไฟล์ Data Job done
+ตรง 99.6% อีก 0.4% ได้รหัสพร้อม suffix ย่อย (`LWSWB_RM` แทน `LWSWB`) · ถ้าวันหน้าไฟล์มีคอลัมน์ SITE_CODE ให้ใช้คอลัมน์แทน
