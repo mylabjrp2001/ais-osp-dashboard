@@ -43,3 +43,4 @@ Lightsail เดิมเก็บไว้เป็น reference/rollback ท�
   (รุ่นเดิม cache จน upload ครั้งหน้า ทำให้สถานะทีมขาด/เลิกดึกค้าง) · เพิ่มการ์ด + เมนู Monthly Report
   (`MONTHLY_REPORT_URL`) · `.gitignore` กัน `*.xlsx` (repo public) · prod ยังไม่เปลี่ยน
 - 2026-10-10 — ไม่ตั้ง `MONTHLY_REPORT_URL` = ซ่อนการ์ด/เมนู Monthly Report (เตรียมขึ้น prod ก่อนที่ Monthly Report จะมีโดเมน)
+- 2026-10-10 — ปิดเครื่อง AWS Lightsail แล้ว (prod อยู่เครื่อง internal) · `runbooks/deploy.md` เก็บไว้อ้างอิงเท่านั้น

@@ -12,7 +12,7 @@ JSON file ข้าง `app.py` + global in-memory variables
 
 ## เอกสาร
 - กับดักที่ต้องรู้ก่อนแก้โค้ด: [gotchas.md](gotchas.md)
-- Deploy Lightsail เดิม (เก็บไว้อ้างอิง): [runbooks/deploy.md](runbooks/deploy.md)
+- Deploy Lightsail เดิม (**ปิดเครื่องแล้ว 2026-10-10** · เก็บไว้อ้างอิงเท่านั้น): [runbooks/deploy.md](runbooks/deploy.md)
 
 ## รัน dev
 ```bash
