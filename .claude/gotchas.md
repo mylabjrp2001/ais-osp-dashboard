@@ -70,3 +70,8 @@ Tunnel ที่ต่อแยกเท่านั้น ถ้าจะเป
 Flask `render_template()` อ่านจาก `templates/` เท่านั้น ไฟล์ชื่อซ้ำที่ root (และ
 `osp-dashboard2-main.zip`, `latest_data.xlsx`) เป็น backup/legacy เก่า ไม่ได้ถูกอ้างถึงใน
 `app.py` เลย — gitignore ไว้แล้ว ไม่ต้องย้ายขึ้น server
+
+## เวลาสรุป Daily OSP Remain ต้องตรงกับข้อความบนหน้า (06:00 · 18:00)
+`background_scheduler()` ใน `app.py` เป็นตัวกำหนดเวลาจริง ส่วน `templates/daily_osp_remain.html` แค่เขียนบอก
+— app.py ที่เพื่อนอัปโหลด 10 ต.ค. 2026 (`8ae15d1`) เปลี่ยนเป็น 08/12/16/20 เงียบ ๆ ทำให้หน้าเขียน 18:00 แต่สรุปจริง 20:00
+แก้กลับใน repo เพื่อนแล้ว (`7efb3b4`) · แก้ชั่วโมงเมื่อไรต้องแก้ทั้ง 2 ที่ (+ class `auto` ของแถวใน template)
