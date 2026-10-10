@@ -45,3 +45,4 @@ Lightsail เดิมเก็บไว้เป็น reference/rollback ท�
 - 2026-10-10 — ไม่ตั้ง `MONTHLY_REPORT_URL` = ซ่อนการ์ด/เมนู Monthly Report (เตรียมขึ้น prod ก่อนที่ Monthly Report จะมีโดเมน)
 - 2026-10-10 — ปิดเครื่อง AWS Lightsail แล้ว (prod อยู่เครื่อง internal) · `runbooks/deploy.md` เก็บไว้อ้างอิงเท่านั้น
 - 2026-10-10 — Daily OSP Remain สรุปตอน 20:00 แทน 18:00: app.py ของเพื่อน (`8ae15d1`) เปลี่ยนเวลาเป็น 08/12/16/20 → แก้กลับเป็น 06:00/18:00 ใน repo เพื่อน (`7efb3b4`) ขึ้น prod แล้ว · repo นี้ยังเป็น 06/18 อยู่แล้ว
+- 2026-10-10 — Daily OSP Remain: ปุ่ม ⏰ ตั้งรอบสรุปในหน้าเว็บ (เวลา HH:MM หลายรอบ · ว่าง = ปิดอัตโนมัติ · เก็บใน `daily_osp_schedule.json` · ค่าเริ่ม 06:00/18:00) — ทำใน repo เพื่อน (`c5d8893`) ขึ้น prod แล้ว · repo นี้ยังไม่มี
