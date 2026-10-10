@@ -10,6 +10,10 @@ JSON file ข้าง `app.py` + global in-memory variables
 - Monthly Report เป็นอีกแอป (repo `osp-monthly-report`) — หน้าแรกมีการ์ดลิงก์ไป ตั้ง URL ด้วย env `MONTHLY_REPORT_URL`
 - รายละเอียดเครื่อง prod อยู่ใน private ops docs เท่านั้น (repo นี้ public)
 
+## กฎ UI (เจ้าของสั่ง 11 ต.ค. 2026)
+- **ห้ามใช้อิโมจิใน UI** — ปุ่ม การ์ด หัวข้อ ป้าย ใช้ไอคอน SVG เท่านั้น · หน้าที่ยังมีอิโมจิ แก้เมื่อแตะหน้านั้น
+- ดีไซน์ต้องดูมืออาชีพและไม่เลียนแบบแอปอื่น · งาน UI ใหญ่เสนอ 2–3 แบบให้เลือกก่อน
+
 ## เอกสาร
 - กับดักที่ต้องรู้ก่อนแก้โค้ด: [gotchas.md](gotchas.md)
 - Deploy Lightsail เดิม (**ปิดเครื่องแล้ว 2026-10-10** · เก็บไว้อ้างอิงเท่านั้น): [runbooks/deploy.md](runbooks/deploy.md)
