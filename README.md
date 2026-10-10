@@ -52,3 +52,4 @@ Lightsail เดิมเก็บไว้เป็น reference/rollback ท�
 - 2026-10-10 — Resource Monitor: คลิกลากเลื่อนตาราง · ปุ่ม 📸 บันทึกตอนนี้ (`POST /resource_snapshot` · snapshot เก็บลงช่อง 30 นาทีปัจจุบันและแทนที่ของเดิมในช่องนั้น) — repo เพื่อน `f4b466d` + `c839c5d` ขึ้น prod แล้ว
 - 2026-10-10 — Resource Monitor sync กับการอัปโหลด: อัปโหลด Excel (`/dashboard` POST) แล้วบันทึกช่อง 30 นาทีปัจจุบันทันที · หน้าเช็ค `/resource_version` ทุก 1 นาทีแล้วรีเฟรชเอง (คงตำแหน่งเลื่อน) · เอาปุ่ม 📸 + `/resource_snapshot` ออก — repo เพื่อน `a6d8a15` ขึ้น prod แล้ว
 - 2026-10-10 — Daily OSP Remain กราฟ: แท่งไม่ติดขอบ (แต่ละ snapshot อยู่กลางช่องของตัวเอง + เผื่อหัว 15%) — repo เพื่อน ขึ้น prod แล้ว
+- 2026-10-10 — หน้าแรก: ทีมพร้อมทำงานเป็นแถวเดียวเต็มความกว้าง + ตาราง Job แยก Zone (SCT/CWT/ONT/TLC) × EDS/FBB/MBB × Priority แทนการ์ด Zone Summary (นับชุดเดียวกับ Aging) — repo เพื่อน ขึ้น prod แล้ว
