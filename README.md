@@ -54,3 +54,4 @@ Lightsail เดิมเก็บไว้เป็น reference/rollback ท�
 - 2026-10-10 — Daily OSP Remain กราฟ: แท่งไม่ติดขอบ (แต่ละ snapshot อยู่กลางช่องของตัวเอง + เผื่อหัว 15%) — repo เพื่อน ขึ้น prod แล้ว
 - 2026-10-10 — หน้าแรก: ทีมพร้อมทำงานเป็นแถวเดียวเต็มความกว้าง + ตาราง Job แยก Zone (SCT/CWT/ONT/TLC) × EDS/FBB/MBB × Priority แทนการ์ด Zone Summary (นับชุดเดียวกับ Aging) — repo เพื่อน ขึ้น prod แล้ว
 - 2026-10-10 — OSP Job Aging Summary: แถวหัวกลุ่ม EDS/FBB/MBB โชว์ยอดรวมทุกคอลัมน์ + สีหัวกลุ่มเดียวกับตาราง Zone — repo เพื่อน ขึ้น prod แล้ว
+- 2026-10-11 — ขึ้น prod: Job Map (`/map`) ใน repo เพื่อน (16 commit จบที่ `9ff7134`) — แผนที่งานค้างตามโซน/เขต · คิวงานพร้อมตัวกรองบริษัท/Priority/สถานะ · พิกัดงานจากใบงาน/Splitter ในแบบ/SITE_MASTER/กลางเขต · เปิดแบบโครงข่าย KMZ (รหัส) แสดงแบบ Google Earth · โหมดมืด · ข้อมูลโครงข่ายอยู่บน server เท่านั้น
