@@ -10,8 +10,15 @@ venv/
 /contacts.json
 /daily_osp_remain.json
 /remarks.json
+/resource_monitor_history.json
 *.json.tmp
 /uploads/
+
+# Job data exports never go in git — this repo is public and they hold every
+# company's jobs (e.g. "Data Job done 2026 10:10:2026.xlsx" ≈ 50 MB)
+*.xlsx
+*.xlsm
+*.xls
 
 # legacy/stray files — not referenced by app.py (templates/ versions are the real ones)
 /index.html

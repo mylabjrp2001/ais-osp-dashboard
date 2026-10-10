@@ -23,14 +23,21 @@ Excel พอดี request นั้นจะขาด (ไม่กี่วิ
 poll — restart ปลอดภัยเพราะ `REMARKS`/`CONTACTS`/`DAILY_OSP_HISTORY` reload จากไฟล์ตอน start และ
 Excel ล่าสุดใน `uploads/` ก็ auto-load ใหม่เหมือนเดิม (ดู `load_latest_excel_into_memory()`)
 
-## /  route เคยคำนวณ home summary ใหม่ทุก request — แก้แล้วในสำเนานี้ (2026-10-07)
-Lightsail CPU burst capacity ลดฮวบตอนมีคนเปิด dashboard พร้อมกัน เพราะ `index()` เรียก
-`build_home_summary()` สดทุกครั้ง (มี `iterrows()` + regex parse datetime ทุก job + loop ทุกทีม
-ใหม่) ซ้ำกับที่ `update_global_data()` คำนวณไปแล้วตอน upload แถม Flask dev server ไม่ได้ตั้ง
-`threaded=True` เลยประมวลผลทีละ request เดียว — request หนักค้าง = ทุกคนที่เปิดพร้อมกันโดนคิว
-ด้วย แก้แล้วโดย cache ผลลง global `HOME_SUMMARY` ตอน `update_global_data()` รันครั้งเดียว (ไม่ใช่
-ทุก GET /) และเปิด `threaded=True` ให้ `app.run()` — **แก้ไว้ใน repo นี้เท่านั้น ยังไม่ได้ขึ้น
-`parinyko/osp-dashboard2`** ต้องส่ง diff นี้ให้เพื่อนเอาไป apply เองถึงจะมีผลจริงบน prod
+## prod ยังรันโค้ดจาก repo เพื่อน และมีไฟล์พังค้างบนดิสก์ (พบ 2026-10-10 · เจ้าของสั่งยังไม่แก้ prod)
+timer บนเครื่อง prod ดึง `parinyko/osp-dashboard2` ทุก 5 นาที เพื่อน push `app.py` ที่ย่อหน้าหาย
+(ก๊อปวางผิด) 2 ครั้งเมื่อ 9 ต.ค.: `1c4c35b` 15:54 → container restart วน 18 รอบ **เว็บล่ม ~15:57–16:06**
+· `2ea8a00` 16:02 ใช้ได้ → กลับมา · `2765348` 16:08 พังอีก → ถูกดึงลงดิสก์แต่ container ไม่ restart
+จึงยังรัน `2ea8a00` ในหน่วยความจำ **restart ครั้งหน้า (รีบูต/crash) = ล่มทันที** จนกว่าจะถอยไฟล์บนดิสก์
+หรือสลับมาดึง repo นี้ · timer มี bug ของเราเองด้วย: แก้แค่ `app.py` ไม่ restart container (โค้ดใหม่ไม่ขึ้น)
+และไม่เช็คว่า parse ได้ก่อน deploy — ตอนสลับมาใช้ repo นี้ต้องแก้ทั้งสองข้อ (ดูรายละเอียดใน private ops docs)
+
+## home summary cache 60 วินาที — อย่า cache จนถึง upload ครั้งหน้า
+`index()` เคยเรียก `build_home_summary()` สดทุก request (มี `iterrows()` + parse วันที่ทุก job) และ
+dev server รับทีละ request → คนเปิดพร้อมกันโดนคิว CPU บน Lightsail พุ่ง · แก้: `cached_home_summary()`
+เก็บผล `HOME_SUMMARY_TTL` = 60 วิ + `invalidate_home_summary()` ตอน upload / save remark / save contact
+และ `threaded=True` · **ห้ามขยายเป็น cache ถาวรจนถึง upload ครั้งหน้า** (รุ่นแรกที่เราทำ 2026-10-07 เป็นแบบนั้น
+และผิด) เพราะสรุปขึ้นกับ remark ("ลา" → ทีมขาด) และเวลาปัจจุบัน ("Available on HH:MM" → ทีมเลิกดึก,
+aging Today/<3 วัน)
 
 ## production ย้ายออกจาก Lightsail แล้ว (2026-10-07) — รายละเอียดอยู่ใน private ops docs
 CPU บน Lightsail พุ่งค้างบ่อย (burst credit หมด) + เสียค่าเครื่องรายเดือนโดยไม่จำเป็น เลยย้ายไปรันบน
@@ -39,10 +46,9 @@ CPU บน Lightsail พุ่งค้างบ่อย (burst credit หม�
 เก็บใน repo นี้เพราะ public** ดูได้จาก private ops docs เท่านั้น (ถามเจ้าของ repo นี้โดยตรง)
 `deploy/` + `runbooks/deploy.md` ที่เหลือในนี้คือของ Lightsail เดิม เก็บไว้เป็น reference/rollback
 
-## deploy จริงมาจากคนละ repo — `deploy/` ที่นี่คือ ops เท่านั้น
-Lightsail instance รัน **[parinyko/osp-dashboard2](https://github.com/parinyko/osp-dashboard2)**
-(repo ของเพื่อน, `app.py` **เคย**เหมือน repo นี้ไบต์ต่อไบต์ ณ 2026-10-05 — ตอนนี้ไม่เหมือนแล้ว
-เพราะแก้ perf fix ข้างบนไว้เฉพาะสำเนานี้) ไม่ใช่ `mylabjrp2001/ais-osp-dashboard`
+## repo เพื่อน (prod ยังดึงอยู่) ไม่มี .gitignore — ประวัติสมัย Lightsail
+ตั้งแต่ 2026-10-10 repo นี้เป็น source หลัก (ดึง `2ea8a00` ของเพื่อนมา + perf fix + เมนู Monthly Report)
+แต่ prod ยังดึง **[parinyko/osp-dashboard2](https://github.com/parinyko/osp-dashboard2)** จนกว่าจะสลับ
 repo เพื่อน **ไม่มี `.gitignore` เลย** — `contacts.json`/`remarks.json`/`daily_osp_remain.json`/
 `uploads/*` ถูก commit ตรงๆ และโดนแอปเขียนทับตลอดเวลาเหมือนกัน แก้ด้วยการ `git stash push -u` ก่อน
 `git pull` แล้ว `git stash pop` กลับ (อยู่ใน `deploy/update.sh` แล้ว) — **ห้ามวาง

@@ -17,9 +17,14 @@ Then open `http://127.0.0.1:5000/`.
   - EDS = EDS-OSP, ETS-OSP, EDS SW NODE-OSP, EDS IPLC-OSP
   - FBB = FTTB-OSP, FTTH-OSP, FTTX-OSP, Splitter-OSP
 
+## Monthly Report
+การ์ด "Monthly Report" ในหน้าแรก (และแถบเมนูหน้า Resource Monitor) ลิงก์ไปอีกแอป ตั้ง URL ด้วย env
+`MONTHLY_REPORT_URL` (ค่าเริ่มต้น `http://localhost:5190` = dev server บนเครื่องเรา) — prod ต้องตั้งเสมอ
+
 ## Deploy
-Production จริงรันโค้ดจาก [github.com/parinyko/osp-dashboard2](https://github.com/parinyko/osp-dashboard2)
-(repo เพื่อน) — **ย้ายออกจาก AWS Lightsail แล้ว (2026-10-07)** ไปรันบนเครื่อง internal แทน
+ตั้งแต่ 2026-10-10 **repo นี้คือ source หลัก** (เรารับช่วงต่อจากเพื่อน) แต่ prod ยังดึงโค้ดจาก
+[github.com/parinyko/osp-dashboard2](https://github.com/parinyko/osp-dashboard2) อยู่ จนกว่าจะสลับ —
+**ย้ายออกจาก AWS Lightsail แล้ว (2026-10-07)** ไปรันบนเครื่อง internal แทน
 รายละเอียด/credential ของเครื่องนั้นอยู่ใน private ops docs เท่านั้น (repo นี้ public) — เอกสาร
 Lightsail เดิมเก็บไว้เป็น reference/rollback ที่ [.claude/runbooks/deploy.md](.claude/runbooks/deploy.md)
 
@@ -32,3 +37,8 @@ Lightsail เดิมเก็บไว้เป็น reference/rollback ท�
 - 2026-10-07 — แก้ CPU spike: cache home summary แทนคำนวณใหม่ทุก request + เปิด `threaded=True`
   (ยังไม่ขึ้น repo เพื่อน ต้องส่ง diff ให้เขา apply เอง) — ย้าย production ออกจาก Lightsail ไปเครื่อง
   internal (รายละเอียดอยู่ private ops docs)
+- 2026-10-10 — **รับช่วงต่อจากเพื่อน: repo นี้เป็น source หลัก** · ดึงโค้ดล่าสุดที่รันได้ของเพื่อน
+  (`2ea8a00` — Resource Monitor, Indue/Outdue) · commit ล่าสุดของเขา `2765348` parse ไม่ผ่าน (ย่อหน้าหาย)
+  ไม่ได้เอามา · perf fix ทำใหม่ให้ถูก: cache home summary 60 วิ + ล้างเมื่อ upload/remark/contact
+  (รุ่นเดิม cache จน upload ครั้งหน้า ทำให้สถานะทีมขาด/เลิกดึกค้าง) · เพิ่มการ์ด + เมนู Monthly Report
+  (`MONTHLY_REPORT_URL`) · `.gitignore` กัน `*.xlsx` (repo public) · prod ยังไม่เปลี่ยน

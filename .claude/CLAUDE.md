@@ -1,18 +1,26 @@
-# ais-osp-dashboard
+# ais-osp-dashboard — Dashboard OSP BKK
 
 Flask dashboard ติดตาม OSP job (upload Excel → แสดงสรุป/จัดทีม) ไม่มี database, state เก็บเป็น
 JSON file ข้าง `app.py` + global in-memory variables
 
-**Production ตัวจริงรันโค้ดจาก repo เพื่อน [parinyko/osp-dashboard2](https://github.com/parinyko/osp-dashboard2)**
-— repo นี้ (`ais-osp-dashboard`) เก็บแค่ `deploy/` + เอกสาร setup ไว้ช่วยเพื่อน ไม่ใช่ source ที่ deploy จริง
+**ตั้งแต่ 2026-10-10 เรารับช่วงแทนเพื่อน — repo นี้คือ source หลัก** (ดึงโค้ดล่าสุดที่ใช้ได้ของ
+[parinyko/osp-dashboard2](https://github.com/parinyko/osp-dashboard2) commit `2ea8a00` มาแล้ว)
+**แต่ prod ยังดึง repo เพื่อนอยู่** — ยังไม่ได้สลับ (เจ้าของสั่งทำ dev ก่อน) ดู gotchas เรื่อง prod
 
-**Production ย้ายออกจาก Lightsail แล้ว (2026-10-07)** ไปรันบนเครื่อง internal แทน — รายละเอียด/
-credential ของเครื่องนั้นอยู่ใน private ops docs เท่านั้น (repo นี้ public) ถามเจ้าของ repo โดยตรง
+- Monthly Report เป็นอีกแอป (repo `osp-monthly-report`) — หน้าแรกมีการ์ดลิงก์ไป ตั้ง URL ด้วย env `MONTHLY_REPORT_URL`
+- รายละเอียดเครื่อง prod อยู่ใน private ops docs เท่านั้น (repo นี้ public)
 
 ## เอกสาร
-- Deploy: [runbooks/deploy.md](runbooks/deploy.md) — ของ AWS Lightsail เดิม เก็บไว้เป็น reference/rollback
 - กับดักที่ต้องรู้ก่อนแก้โค้ด: [gotchas.md](gotchas.md)
+- Deploy Lightsail เดิม (เก็บไว้อ้างอิง): [runbooks/deploy.md](runbooks/deploy.md)
+
+## รัน dev
+```bash
+PORT=5195 python3 app.py     # http://127.0.0.1:5195 · การ์ด Monthly Report ชี้ http://localhost:5190
+```
+ข้อมูล dev = สำเนา `*.json` + Excel ล่าสุดจาก prod (gitignore ทั้งหมด)
 
 ## โครงสร้าง
 - `app.py` — ทั้งแอปอยู่ไฟล์เดียว, `templates/` — HTML (Flask render จากที่นี่เท่านั้น)
 - `uploads/` — ไฟล์ Excel ที่อัปโหลด, `*.json` ที่ root — state runtime (ไม่ track ใน git)
+- ก่อน commit: `python3 -c "import ast; ast.parse(open('app.py').read())"` — ไฟล์ที่ parse ไม่ผ่านเคยทำ prod ล่มมาแล้ว
