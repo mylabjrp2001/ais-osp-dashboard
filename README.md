@@ -19,7 +19,7 @@ Then open `http://127.0.0.1:5000/`.
 
 ## Monthly Report
 การ์ด "Monthly Report" ในหน้าแรก (และแถบเมนูหน้า Resource Monitor) ลิงก์ไปอีกแอป ตั้ง URL ด้วย env
-`MONTHLY_REPORT_URL` (ค่าเริ่มต้น `http://localhost:5190` = dev server บนเครื่องเรา) — prod ต้องตั้งเสมอ
+`MONTHLY_REPORT_URL` — ไม่ตั้ง = ซ่อนการ์ด (prod ตอนนี้) · dev ตั้งเป็น `http://localhost:5190`
 
 ## Deploy
 ตั้งแต่ 2026-10-10 **repo นี้คือ source หลัก** (เรารับช่วงต่อจากเพื่อน) แต่ prod ยังดึงโค้ดจาก
@@ -42,3 +42,4 @@ Lightsail เดิมเก็บไว้เป็น reference/rollback ท�
   ไม่ได้เอามา · perf fix ทำใหม่ให้ถูก: cache home summary 60 วิ + ล้างเมื่อ upload/remark/contact
   (รุ่นเดิม cache จน upload ครั้งหน้า ทำให้สถานะทีมขาด/เลิกดึกค้าง) · เพิ่มการ์ด + เมนู Monthly Report
   (`MONTHLY_REPORT_URL`) · `.gitignore` กัน `*.xlsx` (repo public) · prod ยังไม่เปลี่ยน
+- 2026-10-10 — ไม่ตั้ง `MONTHLY_REPORT_URL` = ซ่อนการ์ด/เมนู Monthly Report (เตรียมขึ้น prod ก่อนที่ Monthly Report จะมีโดเมน)

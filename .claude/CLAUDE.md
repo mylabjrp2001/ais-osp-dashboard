@@ -16,7 +16,7 @@ JSON file ข้าง `app.py` + global in-memory variables
 
 ## รัน dev
 ```bash
-PORT=5195 python3 app.py     # http://127.0.0.1:5195 · การ์ด Monthly Report ชี้ http://localhost:5190
+MONTHLY_REPORT_URL=http://localhost:5190 PORT=5195 python3 app.py   # http://127.0.0.1:5195
 ```
 ข้อมูล dev = สำเนา `*.json` + Excel ล่าสุดจาก prod (gitignore ทั้งหมด)
 

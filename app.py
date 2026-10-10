@@ -10,9 +10,9 @@ from collections import Counter
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "change-this-secret-key")
 
-# Monthly Report is a separate app (repo osp-monthly-report). Default = its dev
-# server on this Mac; production must set MONTHLY_REPORT_URL to the public URL.
-MONTHLY_REPORT_URL = os.environ.get("MONTHLY_REPORT_URL", "http://localhost:5190")
+# Monthly Report is a separate app (repo osp-monthly-report). Unset = its menu
+# entries are hidden, so production shows nothing until it has a public URL.
+MONTHLY_REPORT_URL = os.environ.get("MONTHLY_REPORT_URL", "")
 
 
 @app.context_processor
