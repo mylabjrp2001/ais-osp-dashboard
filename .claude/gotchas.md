@@ -90,3 +90,11 @@ snapshot เดิมเอา Job ID ของ "แถวแรก" + สถา
 Chrome password manager เห็นช่อง password แล้วถือว่าช่องข้อความก่อนหน้าคือ "ชื่อผู้ใช้" → เติมชื่อที่ล็อกอินไว้ลงช่องค้นหาเองตอนคลิกครั้งแรก
 (`autocomplete="off"` ไม่ช่วย) · Job Map เคยโดน: ค้นหา "superadmin" → หมุดและคิวงานหายหมด
 ช่องรหัสสั้น ๆ (1234) ให้ใช้ `type="text"` + CSS `-webkit-text-security: disc` แทน (repo เพื่อน `86d9fc6`)
+
+## Team Done: Done มาจากไฟล์ Monthly Report ไม่ใช่ JobMonitor
+ไฟล์ JobMonitor มีแต่งานที่ยังเปิด (สถานะ Done ที่เห็นคือ `Done(Not Leave)` = ทำเสร็จแต่ยังไม่ออกจากไซต์) ·
+งานปิดจริงอยู่ในไฟล์ `Data Job done 2026.xlsx` ของ Monthly Report (sheet ที่ชื่อขึ้นต้น "Data Job done", คอลัมน์ ASSIGN_TO /
+PRIORITY_ID / REPORT_DATE / SUBSYSTEM) mount เข้า container ที่ `MONTHLY_EXCEL_DIR` · ไฟล์ ~50 MB อ่าน ~7 วินาที →
+`team_done.py` อ่านใน thread เบื้องหลังเมื่อ mtime เปลี่ยน · อัปเดตวันละครั้งตามที่คนอัปโหลด → นับ Done ของ "วันนี้" ไม่ได้ ·
+ชื่อ ASSIGN_TO ตรงกับทีมในแดชบอร์ด ~87% ที่เหลือแสดงเป็นหมายเหตุ "ไม่นับ N งาน"
+· ปีใหม่ชื่อไฟล์/ชื่อ sheet จะเปลี่ยนเป็น 2027 — โค้ดหาไฟล์ที่ชื่อมี "job done" ล่าสุด และ sheet ที่ขึ้นต้น "Data Job done" ให้อยู่แล้ว
