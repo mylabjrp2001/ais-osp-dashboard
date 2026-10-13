@@ -61,3 +61,6 @@ Lightsail เดิมเก็บไว้เป็น reference/rollback ท�
 - 2026-10-13 — ขึ้น prod (repo เพื่อน `fde9179` `09ba836`): Job Monitor — Workforce BKK Pool อยู่ท้ายตารางเสมอ ·
   header ใหม่ (แถบเมนูหน้าแบบ Job Map + การ์ด KPI Critical/Major/Minor กดกรองได้ + การ์ดโซน + แถวเครื่องมือ) ·
   ปุ่มผู้ใช้ทุกหน้าย่อเป็นไอคอนรูปคนกดเปิดเมนู · หน้าแรกเปลี่ยนอิโมจิเป็นไอคอน SVG · Job Map ลิงก์ Status Team ชี้ `/dashboard`
+- 2026-10-13 — ขึ้น prod (repo เพื่อน `835ee5e`): แถบหัวหน้าเดียวกันทุกหน้า (`_app_bar.html` — Status Team · Job Monitor ·
+  Daily OSP · Resource Monitor) · Job Map header 2 แถว (ค้นหา + โซนอยู่แถวสอง) · ลบอิโมจิที่เหลือทั้งหมด ·
+  ช่องรหัสตั้งรอบสรุป Daily OSP เปลี่ยนเป็นช่องข้อความปิดตัวอักษร (กัน Chrome เติมชื่อผู้ใช้)
