@@ -3,9 +3,10 @@
 Flask dashboard ติดตาม OSP job (upload Excel → แสดงสรุป/จัดทีม) ไม่มี database, state เก็บเป็น
 JSON file ข้าง `app.py` + global in-memory variables
 
-**ตั้งแต่ 2026-10-10 เรารับช่วงแทนเพื่อน — repo นี้คือ source หลัก** (ดึงโค้ดล่าสุดที่ใช้ได้ของ
-[parinyko/osp-dashboard2](https://github.com/parinyko/osp-dashboard2) commit `2ea8a00` มาแล้ว)
-**แต่ prod ยังดึง repo เพื่อนอยู่** — ยังไม่ได้สลับ (เจ้าของสั่งทำ dev ก่อน) ดู gotchas เรื่อง prod
+**งานพัฒนาจริงทำใน repo เพื่อน [parinyko/osp-dashboard2](https://github.com/parinyko/osp-dashboard2)**
+(clone ที่ `~/Desktop/developer/osp-dashboard2`) — prod auto-deploy จาก repo นั้นทุก 5 นาที · push = ขึ้น prod
+· commit ที่นั่นห้ามมีชื่อ Claude · repo นี้ (public) เก็บแค่ Push Log + gotchas + เอกสาร
+โค้ดใน repo นี้ค้างอยู่ที่ `2ea8a00` (10 ต.ค.) — ยังไม่มี Job Map / ล็อกอิน / งานหลังจากนั้น
 
 - Monthly Report เป็นอีกแอป (repo `osp-monthly-report`) — หน้าแรกมีการ์ดลิงก์ไป ตั้ง URL ด้วย env `MONTHLY_REPORT_URL`
 - รายละเอียดเครื่อง prod อยู่ใน private ops docs เท่านั้น (repo นี้ public)
