@@ -85,3 +85,8 @@ snapshot เดิมเอา Job ID ของ "แถวแรก" + สถา
 ไฟล์ที่อัปโหลดเข้าแดชบอร์ด (JobMonitor_*.xlsx) ไม่มีคอลัมน์ SITE_CODE (`Node` ว่างทั้งหมด) แต่ Job Title ขึ้นต้นด้วยรหัสไซต์
 `[Important] PADUM-[1605]SitePriority=...` → `site_code_from_title()` ใน app.py (repo เพื่อน) · เทียบกับไฟล์ Data Job done
 ตรง 99.6% อีก 0.4% ได้รหัสพร้อม suffix ย่อย (`LWSWB_RM` แทน `LWSWB`) · ถ้าวันหน้าไฟล์มีคอลัมน์ SITE_CODE ให้ใช้คอลัมน์แทน
+
+## ห้ามใช้ `<input type="password">` ในหน้าที่มีช่องค้นหา
+Chrome password manager เห็นช่อง password แล้วถือว่าช่องข้อความก่อนหน้าคือ "ชื่อผู้ใช้" → เติมชื่อที่ล็อกอินไว้ลงช่องค้นหาเองตอนคลิกครั้งแรก
+(`autocomplete="off"` ไม่ช่วย) · Job Map เคยโดน: ค้นหา "superadmin" → หมุดและคิวงานหายหมด
+ช่องรหัสสั้น ๆ (1234) ให้ใช้ `type="text"` + CSS `-webkit-text-security: disc` แทน (repo เพื่อน `86d9fc6`)
