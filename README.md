@@ -72,3 +72,5 @@ Lightsail เดิมเก็บไว้เป็น reference/rollback ท�
 - 2026-10-13 — ขึ้น prod (repo เพื่อน `f40d5a3`): Team Done นับงานปิดจากไฟล์ที่อัปโหลดที่ `/dashboard` ด้วย — เทียบไฟล์ต่อไฟล์
   (ขึ้น Done(Not Leave) หรือหายไปจากไฟล์ใหม่ = ปิด · กลับมา = ไม่นับ · ไฟล์ที่งานหายเกินครึ่งถือว่าไม่ครบ) เก็บใน
   `team_done_ledger.json` · วันที่อยู่ในไฟล์ Monthly Report ยังใช้ไฟล์นั้น · เพิ่มปุ่ม "วันนี้"
+- 2026-10-15 — ขึ้น prod (repo เพื่อน `1766fd6`): หน้าแรก การ์ด Working นับเฉพาะทีมที่มีงาน Assigned / Accepted
+  (ทีมที่ถือแต่ Held / Transfered / Created / Interupted ไม่อยู่ใน Working แต่ยังนับใน "พร้อมทำงาน")
