@@ -74,3 +74,5 @@ Lightsail เดิมเก็บไว้เป็น reference/rollback ท�
   `team_done_ledger.json` · วันที่อยู่ในไฟล์ Monthly Report ยังใช้ไฟล์นั้น · เพิ่มปุ่ม "วันนี้"
 - 2026-10-15 — ขึ้น prod (repo เพื่อน `1766fd6`): หน้าแรก การ์ด Working นับเฉพาะทีมที่มีงาน Assigned / Accepted
   (ทีมที่ถือแต่ Held / Transfered / Created / Interupted ไม่อยู่ใน Working แต่ยังนับใน "พร้อมทำงาน")
+- 2026-10-22 — ขึ้น prod (repo เพื่อน `a3f6047`): Job Monitor ปุ่ม Sub System แยก **Splitter** ออกจาก FBB
+  (FBB = FTTB / FTTH / FTTX · Splitter = Splitter-OSP) · หน้าแรกและ Job Map ยังนับ Splitter ใน FBB
