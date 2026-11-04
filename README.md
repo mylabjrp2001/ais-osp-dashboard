@@ -79,3 +79,5 @@ Lightsail เดิมเก็บไว้เป็น reference/rollback ท�
 - 2026-10-22 — (repo เพื่อน `6112599`) เพิ่มโค้ด Monthly Report ในโฟลเดอร์ `monthly-report/` ให้เพื่อนแก้/รันบน Render เอง
   (Docker · Root Directory `monthly-report`) · ไม่รวม `.env` / เอกสาร deploy / compose ของ server เรา · เว็บ /monthly ของเรายังรันจาก
   repo `osp-monthly-report` เหมือนเดิม — แก้ที่โฟลเดอร์นั้นไม่ขึ้นเว็บเรา
+- 2026-11-04 — ขึ้น prod (repo เพื่อน `401e3d7`): หน้าแรก เพิ่มตาราง OSP Job Aging Summary · รายชั่วโมง
+  (<3 hr · 3-10 hr · 10-24 hr · >24 hr จาก Create Time) ต่อจากตารางรายวัน · สองตารางใช้วิธีนับชุดเดียวกัน
