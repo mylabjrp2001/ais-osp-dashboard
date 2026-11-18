@@ -81,3 +81,6 @@ Lightsail เดิมเก็บไว้เป็น reference/rollback ท�
   repo `osp-monthly-report` เหมือนเดิม — แก้ที่โฟลเดอร์นั้นไม่ขึ้นเว็บเรา
 - 2026-11-04 — ขึ้น prod (repo เพื่อน `401e3d7`): หน้าแรก เพิ่มตาราง OSP Job Aging Summary · รายชั่วโมง
   (<3 hr · 3-10 hr · 10-24 hr · >24 hr จาก Create Time) ต่อจากตารางรายวัน · สองตารางใช้วิธีนับชุดเดียวกัน
+- 2026-11-18 — ขึ้น prod (repo เพื่อน `ff98332` `5133082`): หน้าแรก การ์ด Working เปลี่ยนชื่อเป็น "ยังไม่รับงาน/ออกเดินทาง" ·
+  หน้าใหม่ **All Jobs** (`/all_jobs`) — งานค้างทุก Sub System (รวม Priority ว่าง · ตัด Done(Not Leave)) ติ๊กเลือก Sub System ได้หลายอัน ·
+  ปุ่มลัด ทั้งหมด / OSP / Radio-OSP / ISP + Power + Facility BS · การ์ด None · ลิงก์ ?preset= / ?subs= / &pri= · Export ตามที่เลือก
