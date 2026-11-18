@@ -84,3 +84,5 @@ Lightsail เดิมเก็บไว้เป็น reference/rollback ท�
 - 2026-11-18 — ขึ้น prod (repo เพื่อน `ff98332` `5133082`): หน้าแรก การ์ด Working เปลี่ยนชื่อเป็น "ยังไม่รับงาน/ออกเดินทาง" ·
   หน้าใหม่ **All Jobs** (`/all_jobs`) — งานค้างทุก Sub System (รวม Priority ว่าง · ตัด Done(Not Leave)) ติ๊กเลือก Sub System ได้หลายอัน ·
   ปุ่มลัด ทั้งหมด / OSP / Radio-OSP / ISP + Power + Facility BS · การ์ด None · ลิงก์ ?preset= / ?subs= / &pri= · Export ตามที่เลือก
+- 2026-11-18 — ขึ้น prod (repo เพื่อน `369dee5`): All Jobs ตัดงานที่ Priority ว่างออก (เหลือ Critical / Major / Minor เหมือน Job Monitor)
+  · เอาการ์ด None ออก · ลิงก์เก่า `?pri=none` เปิดมาเป็นทุก Priority
